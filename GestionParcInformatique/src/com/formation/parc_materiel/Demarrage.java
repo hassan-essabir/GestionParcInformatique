@@ -16,7 +16,7 @@ public class Demarrage {
 		pm.ajoutEquipement(new Equipement(8, "E008", "Sony", "Vaio", new Date(), 1700, 3), 7);
 		pm.ajoutEquipement(new Equipement(9, "E009", "Fujitsu", "Primergy", new Date(), 3500, 5), 8);
 		pm.ajoutEquipement(new Equipement(10, "E010", "Fujitsu", "Primergy", new Date(), 3500, 5), 9);
-		pm.ajoutEquipement(new Equipement(11, "E011", "Fujitsu", "Primergy", new Date(), 3500, 5), 10);
+		pm.ajoutEquipement(new Equipement(11, "E011", "Fujitsu", "Primergy", new Date(), 40500, 5), 10);
 		pm.listeEquipement();
 		pm.supprEquipement(new Equipement(10, "E010", "Fujitsu", "Primergy", new Date(), 3500, 5));
 		pm.listeEquipement();
