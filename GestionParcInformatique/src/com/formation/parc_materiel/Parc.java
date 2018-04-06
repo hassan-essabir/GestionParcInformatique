@@ -7,7 +7,6 @@ public class Parc {
 	Equipement[] equipements = new Equipement[300];
 
 	public void ajoutEquipement(Equipement eq, int position) {
-		System.out.println("--Ajouter équipement en position " + position);
 		equipements[position] = new Equipement();
 		equipements[position].identifiant = eq.identifiant;
 		equipements[position].numeroSerie = eq.numeroSerie;
@@ -22,14 +21,7 @@ public class Parc {
 		System.out.println("--Liste des équipements");
 		for (int i = 0; i < equipements.length; i++) {
 			if (equipements[i] != null) {
-				System.out.println(equipements);
-				// System.out.println("identifiant : " + equipements[i].identifiant);
-				// System.out.println("numeroSerie : " + equipements[i].numeroSerie);
-				// System.out.println("marque : " + equipements[i].marque);
-				// System.out.println("modele : " + equipements[i].modele);
-				// System.out.println("dateAchat : " + equipements[i].dateAchat);
-				// System.out.println("prixAchat : " + equipements[i].prixAchat);
-				// System.out.println("garantie : " + equipements[i].garantie);
+				System.out.println(toString().valueOf(equipements[i]));
 			}
 		}
 	}
