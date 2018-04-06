@@ -3,6 +3,10 @@ package com.formation.parc_materiel;
 import java.util.Calendar;
 import java.util.Date;
 
+enum TypeEquipement {
+	FIXE, PORTABLE
+}
+
 public class Equipement {
 	public int identifiant;
 	public String numeroSerie;
@@ -11,6 +15,7 @@ public class Equipement {
 	public Date dateAchat;
 	public float prixAchat;
 	public int garantie;
+	public TypeEquipement type;
 
 	public String afficheDetailGarantie(Equipement eq) {
 		String detailGarantie = null;
@@ -55,7 +60,7 @@ public class Equipement {
 	}
 
 	public Equipement(int identifiant, String numeroSerie, String marque, String modele, Date dateAchat,
-			float prixAchat, int garantie) {
+			float prixAchat, int garantie, TypeEquipement type) {
 		super();
 		this.identifiant = identifiant;
 		this.numeroSerie = numeroSerie;
@@ -64,6 +69,7 @@ public class Equipement {
 		this.dateAchat = dateAchat;
 		this.prixAchat = prixAchat;
 		this.garantie = garantie;
+		this.type = type;
 	}
 
 	public Equipement() {
@@ -73,8 +79,17 @@ public class Equipement {
 
 	@Override
 	public String toString() {
-		return "Equipement [marque=" + marque + ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat="
-				+ prixAchat + ", garantie=" + garantie + "]";
+		return "Equipement [identifiant=" + identifiant + ", numeroSerie=" + numeroSerie + ", marque=" + marque
+				+ ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + ", garantie="
+				+ garantie + ", type=" + type + "]";
+	}
+
+	public TypeEquipement getType() {
+		return type;
+	}
+
+	public void setType(TypeEquipement type) {
+		this.type = type;
 	}
 
 }
