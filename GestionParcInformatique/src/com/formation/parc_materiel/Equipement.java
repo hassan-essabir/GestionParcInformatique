@@ -78,6 +78,36 @@ public class Equipement {
 		this.type = type;
 	}
 
+	public Equipement(String marque, String modele) {
+		super();
+		this.marque = marque;
+		this.modele = modele;
+	}
+
+	public Equipement(String marque, String modele, Date dateAchat) {
+		super();
+		this.marque = marque;
+		this.modele = modele;
+		this.dateAchat = dateAchat;
+	}
+
+	public Equipement(String marque, String modele, Date dateAchat, float prixAchat) {
+		super();
+		this.marque = marque;
+		this.modele = modele;
+		this.dateAchat = dateAchat;
+		this.prixAchat = prixAchat;
+	}
+
+	public Equipement(String marque, String modele, Date dateAchat, float prixAchat, int garantie) {
+		super();
+		this.marque = marque;
+		this.modele = modele;
+		this.dateAchat = dateAchat;
+		this.prixAchat = prixAchat;
+		this.garantie = garantie;
+	}
+
 	public Equipement() {
 		super();
 		// TODO Auto-generated constructor stub
