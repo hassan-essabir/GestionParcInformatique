@@ -59,6 +59,12 @@ public class Equipement {
 		return isGarantieExpiree;
 	}
 
+	public static double conversionUSD(double prix) {
+		double prixUSD = 0;
+		prixUSD = prix * 1.20;
+		return prixUSD;
+	}
+
 	public Equipement(int identifiant, String numeroSerie, String marque, String modele, Date dateAchat,
 			float prixAchat, int garantie, TypeEquipement type) {
 		super();
@@ -80,8 +86,8 @@ public class Equipement {
 	@Override
 	public String toString() {
 		return "Equipement [identifiant=" + identifiant + ", numeroSerie=" + numeroSerie + ", marque=" + marque
-				+ ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + ", garantie="
-				+ garantie + ", type=" + getType() + "]";
+				+ ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + "|"
+				+ conversionUSD(prixAchat) + ", garantie=" + garantie + ", type=" + getType() + "]";
 	}
 
 	public TypeEquipement getType() {
