@@ -15,7 +15,7 @@ public class Parc {
 		equipements[position].dateAchat = eq.dateAchat;
 		equipements[position].prixAchat = eq.prixAchat;
 		equipements[position].garantie = eq.garantie;
-		equipements[position].type = eq.type;
+		equipements[position].setType(eq.type);
 	}
 
 	public void listeEquipement() {

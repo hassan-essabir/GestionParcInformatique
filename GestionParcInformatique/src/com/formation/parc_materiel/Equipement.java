@@ -81,7 +81,7 @@ public class Equipement {
 	public String toString() {
 		return "Equipement [identifiant=" + identifiant + ", numeroSerie=" + numeroSerie + ", marque=" + marque
 				+ ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + ", garantie="
-				+ garantie + ", type=" + type + "]";
+				+ garantie + ", type=" + getType() + "]";
 	}
 
 	public TypeEquipement getType() {
