@@ -47,6 +47,9 @@ public class Demarrage {
 			pm.ajoutEquipement(new Equipement(11, "E011", "Fujitsu", "Primergy", (Date) formatter.parse("05/06/2006"),
 					4000, 5, TypeEquipement.FIXE), 10);
 
+			pm.ajoutEquipement(new Equipement("Fujitsu", "Primergy", (Date) formatter.parse("05/06/2006"), 4000, 5),
+					11);
+
 			pm.listeEquipement();
 
 			pm.supprEquipement(new Equipement(10, "E010", "Fujitsu", "Primergy", (Date) formatter.parse("05/06/2006"),

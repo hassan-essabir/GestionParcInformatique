@@ -24,6 +24,12 @@ public class Ordinateur extends Equipement {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "Ordinateur [marque=" + marque + ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat="
+				+ prixAchat + ", garantie=" + garantie + "]";
+	}
+
 	public String adresseIP;
 
 }

@@ -37,4 +37,10 @@ public class Imprimante extends Equipement {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "Imprimante [marque=" + marque + ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat="
+				+ prixAchat + ", garantie=" + garantie + "]";
+	}
+
 }
