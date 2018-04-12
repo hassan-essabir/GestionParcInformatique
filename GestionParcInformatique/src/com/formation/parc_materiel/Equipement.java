@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 enum TypeEquipement {
-	FIXE, PORTABLE
+	FIXE, PORTABLE, ORDINATEUR
 }
 
 public class Equipement {
@@ -116,8 +116,9 @@ public class Equipement {
 	@Override
 	public String toString() {
 		return "Equipement [identifiant=" + identifiant + ", numeroSerie=" + numeroSerie + ", marque=" + marque
-				+ ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + "|"
-				+ conversionUSD(prixAchat) + ", garantie=" + garantie + ", type=" + getType() + "]";
+				+ ", modele=" + modele + ", dateAchat=" + Outils.getDateFmt(dateAchat) + ", prixAchat="
+				+ Outils.getPrixFmt(prixAchat) + "|" + Outils.getPrixFmt(conversionUSD(prixAchat)) + ", garantie="
+				+ garantie + ", type=" + getType() + ", " + Outils.composeUniqueID(Equipement.this) + "]";
 	}
 
 	public TypeEquipement getType() {
@@ -126,6 +127,12 @@ public class Equipement {
 
 	public void setType(TypeEquipement type) {
 		this.type = type;
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		super.finalize();
 	}
 
 }

@@ -15,7 +15,7 @@ public class Demarrage {
 			Date date = null;
 
 			pm.ajoutEquipement(new Equipement(1, "E001", "DELL", "Précision", (Date) formatter.parse("07/07/2009"),
-					1500, 3, TypeEquipement.PORTABLE), 0);
+					1500, 3, TypeEquipement.ORDINATEUR), 0);
 
 			pm.ajoutEquipement(new Equipement(2, "E002", "Canon", "Pixma", (Date) formatter.parse("09/04/2010"), 300, 1,
 					TypeEquipement.PORTABLE), 1);
@@ -58,8 +58,11 @@ public class Demarrage {
 			pm.listeEquipement();
 
 			System.out.println(pm.getGarantieMoyenne());
-			System.out.println(pm.getPrixeMoyen());
-			System.out.println(pm.getValeurParc());
+			System.out.println(pm.getPrixMoyenFmt());
+			System.out.println(pm.getValeurParcFmt());
+
+			final String SEPARATEUR = "/";
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

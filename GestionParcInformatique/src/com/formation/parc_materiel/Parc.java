@@ -52,7 +52,7 @@ public class Parc {
 		return dureeGarantieMoyenne / compteur;
 	}
 
-	public float getPrixeMoyen() {
+	public float getPrixMoyen() {
 		float PrixMoyen = 0;
 		int compteur = 0;
 		System.out.println("--Calcul prix moyen des équipements");
@@ -65,6 +65,10 @@ public class Parc {
 		return PrixMoyen / compteur;
 	}
 
+	public String getPrixMoyenFmt() {
+		return Outils.getPrixFmt(getPrixMoyen());
+	}
+
 	public double getValeurParc() {
 		double valeurParc = 0;
 		System.out.println("--Calcul valeur parc");
@@ -74,6 +78,10 @@ public class Parc {
 			}
 		}
 		return valeurParc;
+	}
+
+	public String getValeurParcFmt() {
+		return Outils.getPrixFmt(getValeurParc());
 	}
 
 }
