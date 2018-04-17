@@ -2,7 +2,12 @@ package com.formation.parc_materiel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * <b>Classe Demarrage</b>
@@ -17,6 +22,9 @@ public class Demarrage {
 
 	public static void main(String[] args) throws Exception {
 
+//		ArrayList<Equipement> eqs = new ArrayList<Equipement>();
+//		HashMap<Integer, Equipement> hash = new HashMap<Integer, Equipement>();
+		
 		ParcMateriel p = new ParcMateriel();
 
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -32,8 +40,9 @@ public class Demarrage {
 		System.out.println(eq.afficheDetailGarantie(eq));
 		System.out.println("garantie expirée O/N : "
 				+ (eq.isGarantieExpiree() ? "OUI" : "NON"));
-
-		eq = new Equipement();
+//		hash.put(1, eq);
+//		eqs.add(eq);
+		eq = new Ordinateur();
 		eq.setIdentifiant(2);
 		eq.setNumeroSerie("E002");
 		eq.setMarque("Canon");
@@ -41,11 +50,13 @@ public class Demarrage {
 		eq.setGarantie(1);
 		eq.setDateAchat((Date) formatter.parse("09/04/2010"));
 		eq.setPrixAchat(300);
+		((Ordinateur)eq).setAdresseIP("sds");
 		p.ajoutEquipement(eq, 1);
 		System.out.println(eq.afficheDetailGarantie(eq));
 		System.out.println("garantie expirée O/N : "
 				+ (eq.isGarantieExpiree() ? "OUI" : "NON"));
-
+//		eqs.add(eq);
+//		hash.put(2, eq);
 		eq = new Equipement();
 		eq.setIdentifiant(3);
 		eq.setNumeroSerie("E003");
@@ -55,13 +66,35 @@ public class Demarrage {
 		eq.setDateAchat((Date) formatter.parse("03/03/2005"));
 		eq.setPrixAchat(200);
 		p.ajoutEquipement(eq, 2);
+//		eqs.add(eq);
+//		hash.put(3, eq);
 		System.out.println(eq.afficheDetailGarantie(eq));
 		System.out.println("garantie expirée O/N : "
 				+ (eq.isGarantieExpiree() ? "OUI" : "NON"));
-
-		p.listeEquipement();
-		p.supprEquipement(eq);
-		p.listeEquipement();
+		
+//		for(Equipement e:eqs){
+//			System.out.println(e);
+//		}
+//		
+//		for(Entry<Integer, Equipement> e:hash.entrySet()){
+//			System.out.println("clé => " + e.getKey() +", valeur => " + e.getValue());
+//		}
+		
+//		if(eq instanceof Telephone){
+//			System.out.println("Ceci est une télephone");
+//		}
+//		
+//		if(eq instanceof Equipement){
+//			System.out.println("Ceci est un équipement");
+//		}
+//		
+//		if(eq instanceof Ordinateur){
+//			System.out.println("Ceci est un ordinateur");
+//		}
+		
+		//p.listeEquipement();
+		//p.supprEquipement(eq);
+		//p.listeEquipement();
 
 		System.out.println(p.getGarantieMoyenne());
 		System.out.println(p.getPrixMoyen());

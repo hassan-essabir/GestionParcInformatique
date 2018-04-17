@@ -38,4 +38,18 @@ public class Ordinateur extends Equipement {
 		this.adresseIP = adresseIP;
 	}
 
+	@Override
+	public String toString() {
+		return "Ordinateur [adresseIP=" + adresseIP + ", getAdresseIP()="
+				+ getAdresseIP() + ", isGarantieExpiree()="
+				+ isGarantieExpiree() + ", getIdentifiant()="
+				+ getIdentifiant() + ", getNumeroSerie()=" + getNumeroSerie()
+				+ ", getMarque()=" + getMarque() + ", getModele()="
+				+ getModele() + ", getDateAchat()=" + getDateAchat()
+				+ ", getPrixAchat()=" + getPrixAchat() + ", getGarantie()="
+				+ getGarantie() + ", getType()=" + getType() + ", toString()="
+				+ super.toString() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
+	}
+
 }
