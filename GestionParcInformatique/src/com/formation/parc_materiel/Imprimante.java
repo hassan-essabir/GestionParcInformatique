@@ -6,8 +6,31 @@ enum TypeImprimante {
 	JET_ENCRE, LASER_NB, JET_ENCRE_COULEUR, LASER_COULEUR, THERMIQUE
 }
 
+/**
+ * 
+ * @author Hassan Essabir
+ * @version V18.04
+ *
+ */
 public class Imprimante extends Equipement {
-	public TypeImprimante technologie;
+	private TypeImprimante technologie;
+
+	public Imprimante() {
+		super();
+	}
+
+	public Imprimante(TypeImprimante technologie) {
+		super();
+		this.setTechnologie(technologie);
+	}
+
+	public Imprimante(int identifiant, String numeroSerie, String marque,
+			String modele, Date dateAchat, float prixAchat, int garantie,
+			TypeEquipement type, TypeImprimante technologie) {
+		super(identifiant, numeroSerie, marque, modele, dateAchat, prixAchat,
+				garantie, type);
+		this.setTechnologie(technologie);
+	}
 
 	public TypeImprimante getTechnologie() {
 		return technologie;
@@ -15,32 +38,6 @@ public class Imprimante extends Equipement {
 
 	public void setTechnologie(TypeImprimante technologie) {
 		this.technologie = technologie;
-	}
-
-	public Imprimante(String marque, String modele, Date dateAchat, float prixAchat, int garantie) {
-		super(marque, modele, dateAchat, prixAchat, garantie);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Imprimante(String marque, String modele, Date dateAchat, float prixAchat) {
-		super(marque, modele, dateAchat, prixAchat);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Imprimante(String marque, String modele, Date dateAchat) {
-		super(marque, modele, dateAchat);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Imprimante(String marque, String modele) {
-		super(marque, modele);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "Imprimante [marque=" + marque + ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat="
-				+ prixAchat + ", garantie=" + garantie + "]";
 	}
 
 }

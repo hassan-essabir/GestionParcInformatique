@@ -2,20 +2,46 @@ package com.formation.parc_materiel;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 enum TypeEquipement {
-	FIXE, PORTABLE, ORDINATEUR
+	FIXE, PORTABLE
 }
 
+/**
+ * 
+ * @author Hassan Essabir
+ * @version V18.04
+ *
+ */
 public class Equipement {
-	public int identifiant;
-	public String numeroSerie;
-	public String marque;
-	public String modele;
-	public Date dateAchat;
-	public float prixAchat;
-	public int garantie;
-	public TypeEquipement type;
+	private int identifiant;
+	private String numeroSerie;
+	private String marque;
+	private String modele;
+	private Date dateAchat;
+	private float prixAchat;
+	private int garantie;
+	private TypeEquipement type;
+	private final static double TAUX = 1.20;
+
+	public Equipement() {
+		super();
+	}
+
+	public Equipement(int identifiant, String numeroSerie, String marque,
+			String modele, Date dateAchat, float prixAchat, int garantie,
+			TypeEquipement type) {
+		super();
+		this.identifiant = identifiant;
+		this.numeroSerie = numeroSerie;
+		this.marque = marque;
+		this.modele = modele;
+		this.dateAchat = dateAchat;
+		this.prixAchat = prixAchat;
+		this.garantie = garantie;
+		this.type = type;
+	}
 
 	public String afficheDetailGarantie(Equipement eq) {
 		String detailGarantie = null;
@@ -32,93 +58,93 @@ public class Equipement {
 		case 0:
 			detailGarantie = "Aucune Garantie";
 			break;
-		default:
-			detailGarantie = null;
-			break;
 		}
 		return detailGarantie;
 	}
 
 	public boolean isGarantieExpiree() {
 		boolean isGarantieExpiree = false;
-		// Initialisation d'un calendrier à la date du jour
 		Calendar finGarantie = Calendar.getInstance();
 		finGarantie.setTime(this.dateAchat);
 		finGarantie.add(Calendar.YEAR, garantie);
-		// Transfert de la date modifiée dans un objet date
 		Date dateFinGarantie = finGarantie.getTime();
-
 		Date toDay = new Date();
 
-		if (dateFinGarantie.before(toDay)) {
-			System.out.println("Garantie valable");
+		long diff = Math.abs(dateFinGarantie.getTime() - toDay.getTime());
+		long depassement = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+		if (dateFinGarantie.after(toDay)) {
+			System.out.println("Garantie valable pour " + depassement
+					+ " jours");
+			isGarantieExpiree = false;
+
 		} else {
-			System.out.println("Garantie expirée");
+			System.out.println("Garantie expirée depuis " + depassement
+					+ " jours");
+			isGarantieExpiree = true;
 		}
 
 		return isGarantieExpiree;
 	}
 
 	public static double conversionUSD(double prix) {
-		double prixUSD = 0;
-		prixUSD = prix * 1.20;
-		return prixUSD;
+		return prix * TAUX;
 	}
 
-	public Equipement(int identifiant, String numeroSerie, String marque, String modele, Date dateAchat,
-			float prixAchat, int garantie, TypeEquipement type) {
-		super();
+	public int getIdentifiant() {
+		return identifiant;
+	}
+
+	public void setIdentifiant(int identifiant) {
 		this.identifiant = identifiant;
+	}
+
+	public String getNumeroSerie() {
+		return numeroSerie;
+	}
+
+	public void setNumeroSerie(String numeroSerie) {
 		this.numeroSerie = numeroSerie;
+	}
+
+	public String getMarque() {
+		return marque;
+	}
+
+	public void setMarque(String marque) {
 		this.marque = marque;
+	}
+
+	public String getModele() {
+		return modele;
+	}
+
+	public void setModele(String modele) {
 		this.modele = modele;
+	}
+
+	public Date getDateAchat() {
+		return dateAchat;
+	}
+
+	public void setDateAchat(Date dateAchat) {
 		this.dateAchat = dateAchat;
+	}
+
+	public float getPrixAchat() {
+		return prixAchat;
+	}
+
+	public void setPrixAchat(float prixAchat) {
 		this.prixAchat = prixAchat;
+	}
+
+	public int getGarantie() {
+		return garantie;
+	}
+
+	public void setGarantie(int garantie) {
 		this.garantie = garantie;
-		this.type = type;
-	}
-
-	public Equipement(String marque, String modele) {
-		super();
-		this.marque = marque;
-		this.modele = modele;
-	}
-
-	public Equipement(String marque, String modele, Date dateAchat) {
-		super();
-		this.marque = marque;
-		this.modele = modele;
-		this.dateAchat = dateAchat;
-	}
-
-	public Equipement(String marque, String modele, Date dateAchat, float prixAchat) {
-		super();
-		this.marque = marque;
-		this.modele = modele;
-		this.dateAchat = dateAchat;
-		this.prixAchat = prixAchat;
-	}
-
-	public Equipement(String marque, String modele, Date dateAchat, float prixAchat, int garantie) {
-		super();
-		this.marque = marque;
-		this.modele = modele;
-		this.dateAchat = dateAchat;
-		this.prixAchat = prixAchat;
-		this.garantie = garantie;
-	}
-
-	public Equipement() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "Equipement [identifiant=" + identifiant + ", numeroSerie=" + numeroSerie + ", marque=" + marque
-				+ ", modele=" + modele + ", dateAchat=" + Outils.getDateFmt(dateAchat) + ", prixAchat="
-				+ Outils.getPrixFmt(prixAchat) + "|" + Outils.getPrixFmt(conversionUSD(prixAchat)) + ", garantie="
-				+ garantie + ", type=" + getType() + ", " + Outils.composeUniqueID(Equipement.this) + "]";
 	}
 
 	public TypeEquipement getType() {
@@ -130,9 +156,88 @@ public class Equipement {
 	}
 
 	@Override
+	public String toString() {
+		return "Equipement [identifiant=" + identifiant + ", numeroSerie="
+				+ numeroSerie + ", marque=" + marque + ", modele=" + modele
+				+ ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + "|"
+				+ conversionUSD(prixAchat) + ", garantie=" + garantie
+				+ ", type=" + type + "]";
+	}
+
+	@Override
 	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
 		super.finalize();
 	}
+	
+	// public Equipement(int identifiant, String numeroSerie, String marque,
+	// String modele, Date dateAchat, float prixAchat, int garantie,
+	// TypeEquipement type) {
+	// super();
+	// this.identifiant = identifiant;
+	// this.numeroSerie = numeroSerie;
+	// this.marque = marque;
+	// this.modele = modele;
+	// this.dateAchat = dateAchat;
+	// this.prixAchat = prixAchat;
+	// this.garantie = garantie;
+	// this.type = type;
+	// }
+	//
+	// public Equipement(String marque, String modele) {
+	// super();
+	// this.marque = marque;
+	// this.modele = modele;
+	// }
+	//
+	// public Equipement(String marque, String modele, Date dateAchat) {
+	// super();
+	// this.marque = marque;
+	// this.modele = modele;
+	// this.dateAchat = dateAchat;
+	// }
+	//
+	// public Equipement(String marque, String modele, Date dateAchat,
+	// float prixAchat) {
+	// super();
+	// this.marque = marque;
+	// this.modele = modele;
+	// this.dateAchat = dateAchat;
+	// this.prixAchat = prixAchat;
+	// }
+	//
+	// public Equipement(String marque, String modele, Date dateAchat,
+	// float prixAchat, int garantie) {
+	// super();
+	// this.marque = marque;
+	// this.modele = modele;
+	// this.dateAchat = dateAchat;
+	// this.prixAchat = prixAchat;
+	// this.garantie = garantie;
+	// }
+	//
+	// public Equipement() {
+	// super();
+	// }
+	//
+	// @Override
+	// public String toString() {
+	// return "Equipement [identifiant=" + identifiant + ", numeroSerie="
+	// + numeroSerie + ", marque=" + marque + ", modele=" + modele
+	// + ", dateAchat=" + Outils.getDateFmt(dateAchat)
+	// + ", prixAchat=" + Outils.getPrixFmt(prixAchat) + "|"
+	// + Outils.getPrixFmt(conversionUSD(prixAchat)) + ", garantie="
+	// + garantie + ", type=" + getType() + ", "
+	// + Outils.composeUniqueID(Equipement.this) + "]";
+	// }
+	//
+	// public TypeEquipement getType() {
+	// return type;
+	// }
+	//
+	// public void setType(TypeEquipement type) {
+	// this.type = type;
+	// }
+	//
+
 
 }

@@ -2,28 +2,39 @@ package com.formation.parc_materiel;
 
 import java.util.Date;
 
+/**
+ * 
+ * @author Hassan Essabir
+ * @version V18.04
+ *
+ */
 public class Telephone extends Equipement {
 
-	public String numeroAppel;
+	private String numeroAppel;
 
-	public Telephone(String marque, String modele, Date dateAchat, float prixAchat, int garantie) {
-		super(marque, modele, dateAchat, prixAchat, garantie);
-		// TODO Auto-generated constructor stub
+	public Telephone() {
+		super();
 	}
 
-	public Telephone(String marque, String modele, Date dateAchat, float prixAchat) {
-		super(marque, modele, dateAchat, prixAchat);
-		// TODO Auto-generated constructor stub
+	public Telephone(String numeroAppel) {
+		super();
+		this.setNumeroAppel(numeroAppel);
 	}
 
-	public Telephone(String marque, String modele, Date dateAchat) {
-		super(marque, modele, dateAchat);
-		// TODO Auto-generated constructor stub
+	public Telephone(int identifiant, String numeroSerie, String marque,
+			String modele, Date dateAchat, float prixAchat, int garantie,
+			TypeEquipement type, String numeroAppel) {
+		super(identifiant, numeroSerie, marque, modele, dateAchat, prixAchat,
+				garantie, type);
+		this.setNumeroAppel(numeroAppel);
 	}
 
-	public Telephone(String marque, String modele) {
-		super(marque, modele);
-		// TODO Auto-generated constructor stub
+	public String getNumeroAppel() {
+		return numeroAppel;
+	}
+
+	public void setNumeroAppel(String numeroAppel) {
+		this.numeroAppel = numeroAppel;
 	}
 
 }

@@ -1,39 +1,54 @@
 package com.formation.parc_materiel;
 
+/**
+ * 
+ * @author Hassan Essabir
+ * @version V18.04
+ *
+ */
 public class Parc {
-	public int identifiant;
-	public String libelle;
-	public Collaborateur gestionnaire;
-	Equipement[] equipements = new Equipement[300];
+	private int identifiant;
+	private String libelle;
+	private Collaborateur gestionnaire;
+	private Equipement[] equipements;
+
+	public Parc() {
+		super();
+		equipements = new Equipement[300];
+	}
+
+	public Parc(int identifiant, String libelle, Collaborateur gestionnaire,
+			Equipement[] equipements) {
+		super();
+		this.identifiant = identifiant;
+		this.libelle = libelle;
+		this.gestionnaire = gestionnaire;
+		this.equipements = equipements;
+	}
 
 	public void ajoutEquipement(Equipement eq, int position) {
-		equipements[position] = new Equipement();
-		equipements[position].identifiant = eq.identifiant;
-		equipements[position].numeroSerie = eq.numeroSerie;
-		equipements[position].marque = eq.marque;
-		equipements[position].modele = eq.modele;
-		equipements[position].dateAchat = eq.dateAchat;
-		equipements[position].prixAchat = eq.prixAchat;
-		equipements[position].garantie = eq.garantie;
-		equipements[position].setType(eq.type);
+		if (position < 300) {
+			equipements[position] = eq;
+			System.out.println("--Equipement added");
+		}
 	}
 
 	public void listeEquipement() {
-		System.out.println("--Liste des équipements");
+		System.out.println("--Equipment list");
 		for (int i = 0; i < equipements.length; i++) {
 			if (equipements[i] != null) {
-				System.out.println(toString().valueOf(equipements[i]));
+				System.out.println(equipements[i]);
 			}
 		}
 	}
 
 	public void supprEquipement(Equipement eq) {
-		System.out.println("--Supprimer équipement ayant identifiant N° " + eq.identifiant);
 		for (int i = 0; i < equipements.length; i++) {
 			if (equipements[i] != null) {
-				if (equipements[i].identifiant == eq.identifiant) {
+				if (equipements[i].getIdentifiant() == eq.getIdentifiant()) {
 					equipements[i] = null;
-					break;
+					System.out.println("--Equipement removed "
+							+ eq.getIdentifiant());
 				}
 			}
 		}
@@ -42,11 +57,12 @@ public class Parc {
 	public float getGarantieMoyenne() {
 		float dureeGarantieMoyenne = 0;
 		int compteur = 0;
-		System.out.println("--Calcul garantie moyenne");
+		System.out.println("--Warranty average");
 		for (int i = 0; i < equipements.length; i++) {
 			if (equipements[i] != null) {
-				dureeGarantieMoyenne = dureeGarantieMoyenne + equipements[i].garantie;
-				compteur = compteur + 1;
+				dureeGarantieMoyenne = dureeGarantieMoyenne
+						+ equipements[i].getGarantie();
+				compteur++;
 			}
 		}
 		return dureeGarantieMoyenne / compteur;
@@ -55,33 +71,69 @@ public class Parc {
 	public float getPrixMoyen() {
 		float PrixMoyen = 0;
 		int compteur = 0;
-		System.out.println("--Calcul prix moyen des équipements");
+		System.out.println("--Price average");
 		for (int i = 0; i < equipements.length; i++) {
 			if (equipements[i] != null) {
-				PrixMoyen = PrixMoyen + equipements[i].prixAchat;
-				compteur = compteur + 1;
+				PrixMoyen = PrixMoyen + equipements[i].getPrixAchat();
+				compteur++;
 			}
 		}
 		return PrixMoyen / compteur;
+	}
+
+	public double getValeurParc() {
+		double valeurParc = 0;
+		System.out.println("--Parc value");
+		for (int i = 0; i < equipements.length; i++) {
+			if (equipements[i] != null) {
+				valeurParc = valeurParc + equipements[i].getPrixAchat();
+			}
+		}
+		return valeurParc;
 	}
 
 	public String getPrixMoyenFmt() {
 		return Outils.getPrixFmt(getPrixMoyen());
 	}
 
-	public double getValeurParc() {
-		double valeurParc = 0;
-		System.out.println("--Calcul valeur parc");
-		for (int i = 0; i < equipements.length; i++) {
-			if (equipements[i] != null) {
-				valeurParc = valeurParc + equipements[i].prixAchat;
-			}
-		}
-		return valeurParc;
-	}
-
 	public String getValeurParcFmt() {
 		return Outils.getPrixFmt(getValeurParc());
 	}
+	
+	public int getIdentifiant() {
+		return identifiant;
+	}
+
+	public void setIdentifiant(int identifiant) {
+		this.identifiant = identifiant;
+	}
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+
+	public Collaborateur getGestionnaire() {
+		return gestionnaire;
+	}
+
+	public void setGestionnaire(Collaborateur gestionnaire) {
+		this.gestionnaire = gestionnaire;
+	}
+
+	public Equipement[] getEquipements() {
+		return equipements;
+	}
+
+	public void setEquipements(Equipement[] equipements) {
+		this.equipements = equipements;
+	}
+
+	
+
+
 
 }
