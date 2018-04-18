@@ -19,7 +19,8 @@ public class Demarrage {
 	public static void main(String[] args) {
 
 		// List<Equipement> eqs = new ArrayList<>();
-		// HashMap<Integer, Equipement> hash = new HashMap<Integer, Equipement>();
+		// HashMap<Integer, Equipement> hash = new HashMap<Integer,
+		// Equipement>();
 
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -39,7 +40,8 @@ public class Demarrage {
 		ord.setPrixAchat(1500);
 		ord.setAdresseIP("10.51.1.0");
 		// System.out.println(ord.afficheDetailGarantie());
-		// System.out.println("garantie expirée O/N : " + (ord.isGarantieExpiree() ?
+		// System.out.println("garantie expirée O/N : " +
+		// (ord.isGarantieExpiree() ?
 		// "OUI" : "NON"));
 		try {
 			pm.ajoutEquipement(ord);
@@ -48,7 +50,8 @@ public class Demarrage {
 		}
 
 		try {
-			ord = new Ordinateur(4, "E004", "DELL", "Laitude", (Date) formatter.parse("07/07/2010"), 2000, 5, null,
+			ord = new Ordinateur(4, "E004", "DELL", "Laitude",
+					(Date) formatter.parse("07/07/2010"), 2000, 5, null,
 					"10.51.2.0");
 		} catch (ParseException e3) {
 			// TODO Auto-generated catch block
@@ -61,7 +64,8 @@ public class Demarrage {
 		}
 
 		try {
-			ord = new Ordinateur(2, "E002", "DELL", "Laitude", (Date) formatter.parse("07/07/2010"), 2000, 5, null,
+			ord = new Ordinateur(2, "E002", "DELL", "Laitude",
+					(Date) formatter.parse("07/07/2010"), 2000, 5, null,
 					"10.51.2.0");
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
@@ -75,7 +79,8 @@ public class Demarrage {
 
 		pm.listeEquipement();
 
-		System.out.println("--Recherche ordinateur " + pm.rechercheEquipement(ord.getNumeroSerie()));
+		System.out.println("--Recherche ordinateur "
+				+ pm.rechercheEquipement(ord.getNumeroSerie()));
 		FlotteMobile fm = new FlotteMobile();
 		Telephone tel = new Telephone();
 		tel.setIdentifiant(3);
@@ -98,7 +103,8 @@ public class Demarrage {
 		}
 
 		// System.out.println(tel.afficheDetailGarantie());
-		// System.out.println("garantie expirée O/N : " + (tel.isGarantieExpiree() ?
+		// System.out.println("garantie expirée O/N : " +
+		// (tel.isGarantieExpiree() ?
 		// "OUI" : "NON"));
 
 		fm.listeEquipement();
@@ -110,8 +116,25 @@ public class Demarrage {
 		// System.out.println(p.getPrixMoyen());
 		// System.out.println(p.getValeurParc());
 
+		Agence ag = new Agence();
+		// Collaborateur col = new Collaborateur();
+
+		try {
+			ag.ajoutCollaborateur(new Collaborateur(1, "hassan", "hassan",
+					(Date) formatter.parse("03/03/2018"), 26, null));
+			ag.ajoutCollaborateur(new Collaborateur(1, "hassan", "hassan",
+					(Date) formatter.parse("03/03/2018"), 26, null));
+			ag.ajoutCollaborateur(new Collaborateur(2, "charon", "charon",
+					(Date) formatter.parse("03/03/2018"), 26, null));
+			ag.afficheCollaborateurs();
+			System.out.println(ag.rechercheCollaborateur("hassan"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 		// System.out.println(eq.afficheDetailGarantie(eq));
-		// System.out.println("garantie expirée O/N : " + (eq.isGarantieExpiree() ?
+		// System.out.println("garantie expirée O/N : " +
+		// (eq.isGarantieExpiree() ?
 		// "OUI" : "NON"));
 		// hash.put(1, eq);
 		// eqs.add(eq);
@@ -127,7 +150,8 @@ public class Demarrage {
 		// eqs.add(eq);
 		// p.ajoutEquipement(eq);
 		// System.out.println(eq.afficheDetailGarantie(eq));
-		// System.out.println("garantie expirée O/N : " + (eq.isGarantieExpiree() ?
+		// System.out.println("garantie expirée O/N : " +
+		// (eq.isGarantieExpiree() ?
 		// "OUI" : "NON"));
 		// eqs.add(eq);
 		// hash.put(2, eq);
@@ -137,7 +161,8 @@ public class Demarrage {
 		// }
 		//
 		// for(Entry<Integer, Equipement> e:hash.entrySet()){
-		// System.out.println("clé => " + e.getKey() +", valeur => " + e.getValue());
+		// System.out.println("clé => " + e.getKey() +", valeur => " +
+		// e.getValue());
 		// }
 
 		// if(eq instanceof Telephone){

@@ -82,6 +82,13 @@ public class Collaborateur {
 		this.dotation = dotation;
 	}
 
+	@Override
+	public String toString() {
+		return "Collaborateur [identifiant=" + identifiant + ", nom=" + nom
+				+ ", prenom=" + prenom + ", dateEmbauche=" + dateEmbauche
+				+ ", age=" + age + ", dotation=" + dotation + "]";
+	}
+
 
 
 }
