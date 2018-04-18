@@ -1,13 +1,9 @@
 package com.formation.parc_materiel;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * <b>Classe Demarrage</b>
@@ -18,87 +14,143 @@ import java.util.Set;
  */
 public class Demarrage {
 
-	//private final String SEPARATEUR = "/";
+	// private final String SEPARATEUR = "/";
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 
-//		ArrayList<Equipement> eqs = new ArrayList<Equipement>();
-//		HashMap<Integer, Equipement> hash = new HashMap<Integer, Equipement>();
-		
-		ParcMateriel p = new ParcMateriel();
+		// List<Equipement> eqs = new ArrayList<>();
+		// HashMap<Integer, Equipement> hash = new HashMap<Integer, Equipement>();
 
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		Equipement eq = new Equipement();
-		eq.setIdentifiant(1);
-		eq.setNumeroSerie("E001");
-		eq.setMarque("Dell");
-		eq.setModele("Précision");
-		eq.setGarantie(3);
-		eq.setDateAchat((Date) formatter.parse("07/07/2009"));
-		eq.setPrixAchat(1500);
-		p.ajoutEquipement(eq, 0);
-		System.out.println(eq.afficheDetailGarantie(eq));
-		System.out.println("garantie expirée O/N : "
-				+ (eq.isGarantieExpiree() ? "OUI" : "NON"));
-//		hash.put(1, eq);
-//		eqs.add(eq);
-		eq = new Ordinateur();
-		eq.setIdentifiant(2);
-		eq.setNumeroSerie("E002");
-		eq.setMarque("Canon");
-		eq.setModele("Pixma");
-		eq.setGarantie(1);
-		eq.setDateAchat((Date) formatter.parse("09/04/2010"));
-		eq.setPrixAchat(300);
-		((Ordinateur)eq).setAdresseIP("sds");
-		p.ajoutEquipement(eq, 1);
-		System.out.println(eq.afficheDetailGarantie(eq));
-		System.out.println("garantie expirée O/N : "
-				+ (eq.isGarantieExpiree() ? "OUI" : "NON"));
-//		eqs.add(eq);
-//		hash.put(2, eq);
-		eq = new Equipement();
-		eq.setIdentifiant(3);
-		eq.setNumeroSerie("E003");
-		eq.setMarque("Nokia");
-		eq.setModele("5510");
-		eq.setGarantie(1);
-		eq.setDateAchat((Date) formatter.parse("03/03/2005"));
-		eq.setPrixAchat(200);
-		p.ajoutEquipement(eq, 2);
-//		eqs.add(eq);
-//		hash.put(3, eq);
-		System.out.println(eq.afficheDetailGarantie(eq));
-		System.out.println("garantie expirée O/N : "
-				+ (eq.isGarantieExpiree() ? "OUI" : "NON"));
-		
-//		for(Equipement e:eqs){
-//			System.out.println(e);
-//		}
-//		
-//		for(Entry<Integer, Equipement> e:hash.entrySet()){
-//			System.out.println("clé => " + e.getKey() +", valeur => " + e.getValue());
-//		}
-		
-//		if(eq instanceof Telephone){
-//			System.out.println("Ceci est une télephone");
-//		}
-//		
-//		if(eq instanceof Equipement){
-//			System.out.println("Ceci est un équipement");
-//		}
-//		
-//		if(eq instanceof Ordinateur){
-//			System.out.println("Ceci est un ordinateur");
-//		}
-		
-		//p.listeEquipement();
-		//p.supprEquipement(eq);
-		//p.listeEquipement();
 
-		System.out.println(p.getGarantieMoyenne());
-		System.out.println(p.getPrixMoyen());
-		System.out.println(p.getValeurParc());
+		ParcMateriel pm = new ParcMateriel();
+		Ordinateur ord = new Ordinateur();
+		ord.setIdentifiant(1);
+		ord.setNumeroSerie("E001");
+		ord.setMarque("Dell");
+		ord.setModele("Précision");
+		ord.setGarantie(3);
+		try {
+			ord.setDateAchat((Date) formatter.parse("07/07/2009"));
+		} catch (ParseException e4) {
+			// TODO Auto-generated catch block
+			e4.printStackTrace();
+		}
+		ord.setPrixAchat(1500);
+		ord.setAdresseIP("10.51.1.0");
+		// System.out.println(ord.afficheDetailGarantie());
+		// System.out.println("garantie expirée O/N : " + (ord.isGarantieExpiree() ?
+		// "OUI" : "NON"));
+		try {
+			pm.ajoutEquipement(ord);
+		} catch (EquipementIncompatibleException e3) {
+			e3.printStackTrace();
+		}
+
+		try {
+			ord = new Ordinateur(4, "E004", "DELL", "Laitude", (Date) formatter.parse("07/07/2010"), 2000, 5, null,
+					"10.51.2.0");
+		} catch (ParseException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
+		try {
+			pm.ajoutEquipement(ord);
+		} catch (EquipementIncompatibleException e2) {
+			e2.printStackTrace();
+		}
+
+		try {
+			ord = new Ordinateur(2, "E002", "DELL", "Laitude", (Date) formatter.parse("07/07/2010"), 2000, 5, null,
+					"10.51.2.0");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		try {
+			pm.ajoutEquipement(ord);
+		} catch (EquipementIncompatibleException e1) {
+			e1.printStackTrace();
+		}
+
+		pm.listeEquipement();
+
+		System.out.println("--Recherche ordinateur " + pm.rechercheEquipement(ord.getNumeroSerie()));
+		FlotteMobile fm = new FlotteMobile();
+		Telephone tel = new Telephone();
+		tel.setIdentifiant(3);
+		tel.setNumeroSerie("E003");
+		tel.setMarque("Nokia");
+		tel.setModele("5510");
+		tel.setGarantie(1);
+		try {
+			tel.setDateAchat((Date) formatter.parse("03/03/2005"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		tel.setPrixAchat(200);
+
+		try {
+			fm.ajoutEquipement(tel);
+		} catch (EquipementIncompatibleException e) {
+			e.printStackTrace();
+		}
+
+		// System.out.println(tel.afficheDetailGarantie());
+		// System.out.println("garantie expirée O/N : " + (tel.isGarantieExpiree() ?
+		// "OUI" : "NON"));
+
+		fm.listeEquipement();
+
+		// p.supprEquipement(eq);
+		// p.listeEquipement();
+
+		// System.out.println(p.getGarantieMoyenne());
+		// System.out.println(p.getPrixMoyen());
+		// System.out.println(p.getValeurParc());
+
+		// System.out.println(eq.afficheDetailGarantie(eq));
+		// System.out.println("garantie expirée O/N : " + (eq.isGarantieExpiree() ?
+		// "OUI" : "NON"));
+		// hash.put(1, eq);
+		// eqs.add(eq);
+		// eq = new Ordinateur();
+		// eq.setIdentifiant(2);
+		// eq.setNumeroSerie("E002");
+		// eq.setMarque("Canon");
+		// eq.setModele("Pixma");
+		// eq.setGarantie(1);
+		// eq.setDateAchat((Date) formatter.parse("09/04/2010"));
+		// eq.setPrixAchat(300);
+		// ((Ordinateur) eq).setAdresseIP("10.51.1.1");
+		// eqs.add(eq);
+		// p.ajoutEquipement(eq);
+		// System.out.println(eq.afficheDetailGarantie(eq));
+		// System.out.println("garantie expirée O/N : " + (eq.isGarantieExpiree() ?
+		// "OUI" : "NON"));
+		// eqs.add(eq);
+		// hash.put(2, eq);
+
+		// for(Equipement e:eqs){
+		// System.out.println(e);
+		// }
+		//
+		// for(Entry<Integer, Equipement> e:hash.entrySet()){
+		// System.out.println("clé => " + e.getKey() +", valeur => " + e.getValue());
+		// }
+
+		// if(eq instanceof Telephone){
+		// System.out.println("Ceci est une télephone");
+		// }
+		//
+		// if(eq instanceof Equipement){
+		// System.out.println("Ceci est un équipement");
+		// }
+		//
+		// if(eq instanceof Ordinateur){
+		// System.out.println("Ceci est un ordinateur");
+		// }
 
 		// pm.ajoutEquipement(new Equipement(1, "E001", "DELL", "Précision",
 		// (Date) formatter.parse("07/07/2009"),

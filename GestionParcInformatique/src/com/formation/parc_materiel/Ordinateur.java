@@ -21,14 +21,16 @@ public class Ordinateur extends Equipement {
 		this.setAdresseIP(adresseIP);
 	}
 
-	public Ordinateur(int identifiant, String numeroSerie, String marque,
-			String modele, Date dateAchat, float prixAchat, int garantie,
-			TypeEquipement type, String adresseIP) {
-		super(identifiant, numeroSerie, marque, modele, dateAchat, prixAchat,
-				garantie, type);
+	public Ordinateur(int identifiant, String numeroSerie, String marque, String modele, Date dateAchat,
+			float prixAchat, int garantie, TypeEquipement type, String adresseIP) {
+		super(identifiant, numeroSerie, marque, modele, dateAchat, prixAchat, garantie, type);
 		this.setAdresseIP(adresseIP);
 	}
-	
+
+	@Override
+	public int compareTo(Equipement o) {
+		return this.getNumeroSerie().compareTo(o.getNumeroSerie());
+	}
 
 	public String getAdresseIP() {
 		return adresseIP;
@@ -40,16 +42,12 @@ public class Ordinateur extends Equipement {
 
 	@Override
 	public String toString() {
-		return "Ordinateur [adresseIP=" + adresseIP + ", getAdresseIP()="
-				+ getAdresseIP() + ", isGarantieExpiree()="
-				+ isGarantieExpiree() + ", getIdentifiant()="
-				+ getIdentifiant() + ", getNumeroSerie()=" + getNumeroSerie()
-				+ ", getMarque()=" + getMarque() + ", getModele()="
-				+ getModele() + ", getDateAchat()=" + getDateAchat()
-				+ ", getPrixAchat()=" + getPrixAchat() + ", getGarantie()="
-				+ getGarantie() + ", getType()=" + getType() + ", toString()="
-				+ super.toString() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+		return "Ordinateur [adresseIP=" + adresseIP + ", getIdentifiant()=" + getIdentifiant() + ", getNumeroSerie()="
+				+ getNumeroSerie() + ", getMarque()=" + getMarque() + ", getModele()=" + getModele()
+				+ ", getDateAchat()=" + getDateAchat() + ", getPrixAchat()=" + getPrixAchat() + ", getGarantie()="
+				+ getGarantie() + ", getType()=" + getType() + "]";
 	}
+
+
 
 }

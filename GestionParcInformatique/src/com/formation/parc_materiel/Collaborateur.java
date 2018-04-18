@@ -1,6 +1,8 @@
 package com.formation.parc_materiel;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -14,15 +16,15 @@ public class Collaborateur {
 	private String prenom;
 	private Date dateEmbauche;
 	private int age;
-	private Equipement[] dotation;
+	List<Equipement> dotation;
 
 	public Collaborateur() {
 		super();
-		dotation = new Equipement[300];
+		dotation = new ArrayList<>();
 	}
 
-	public Collaborateur(int identifiant, String nom, String prenom,
-			Date dateEmbauche, int age, Equipement[] dotation) {
+	public Collaborateur(int identifiant, String nom, String prenom, Date dateEmbauche, int age,
+			List<Equipement> dotation) {
 		super();
 		this.identifiant = identifiant;
 		this.nom = nom;
@@ -72,12 +74,14 @@ public class Collaborateur {
 		this.age = age;
 	}
 
-	public Equipement[] getDotation() {
+	public List<Equipement> getDotation() {
 		return dotation;
 	}
 
-	public void setDotation(Equipement[] dotation) {
+	public void setDotation(List<Equipement> dotation) {
 		this.dotation = dotation;
 	}
+
+
 
 }

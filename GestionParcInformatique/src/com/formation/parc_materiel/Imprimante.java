@@ -24,12 +24,15 @@ public class Imprimante extends Equipement {
 		this.setTechnologie(technologie);
 	}
 
-	public Imprimante(int identifiant, String numeroSerie, String marque,
-			String modele, Date dateAchat, float prixAchat, int garantie,
-			TypeEquipement type, TypeImprimante technologie) {
-		super(identifiant, numeroSerie, marque, modele, dateAchat, prixAchat,
-				garantie, type);
+	public Imprimante(int identifiant, String numeroSerie, String marque, String modele, Date dateAchat,
+			float prixAchat, int garantie, TypeEquipement type, TypeImprimante technologie) {
+		super(identifiant, numeroSerie, marque, modele, dateAchat, prixAchat, garantie, type);
 		this.setTechnologie(technologie);
+	}
+
+	@Override
+	public int compareTo(Equipement o) {
+		return this.getNumeroSerie().compareTo(o.getNumeroSerie());
 	}
 
 	public TypeImprimante getTechnologie() {

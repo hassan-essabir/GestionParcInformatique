@@ -1,24 +1,27 @@
 package com.formation.parc_materiel;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * 
  * @author Hassan Essabir
  * @version V18.04
  *
  */
-public class Parc {
+public abstract class Parc {
 	private int identifiant;
 	private String libelle;
 	private Collaborateur gestionnaire;
-	private Equipement[] equipements;
+	List<Equipement> equipements;
 
 	public Parc() {
 		super();
-		equipements = new Equipement[300];
+		equipements = new ArrayList<>();
 	}
 
-	public Parc(int identifiant, String libelle, Collaborateur gestionnaire,
-			Equipement[] equipements) {
+	public Parc(int identifiant, String libelle, Collaborateur gestionnaire, ArrayList<Equipement> equipements) {
 		super();
 		this.identifiant = identifiant;
 		this.libelle = libelle;
@@ -26,31 +29,30 @@ public class Parc {
 		this.equipements = equipements;
 	}
 
-	public void ajoutEquipement(Equipement eq, int position) {
-		if (position < 300) {
-			equipements[position] = eq;
-			System.out.println("--Equipement added");
+	public abstract void ajoutEquipement(Equipement eq) throws EquipementIncompatibleException;
+
+	public Equipement rechercheEquipement(String numSerie) {
+		for (Equipement equipement : equipements) {
+			if (equipement.getNumeroSerie().equals(numSerie)) {
+				return equipement;
+			}
 		}
+		return null;
 	}
 
 	public void listeEquipement() {
 		System.out.println("--Equipment list");
-		for (int i = 0; i < equipements.length; i++) {
-			if (equipements[i] != null) {
-				System.out.println(equipements[i]);
-			}
+		Collections.sort(this.equipements);
+		for (Equipement equipement : equipements) {
+			System.out.println(equipement);
 		}
 	}
 
 	public void supprEquipement(Equipement eq) {
-		for (int i = 0; i < equipements.length; i++) {
-			if (equipements[i] != null) {
-				if (equipements[i].getIdentifiant() == eq.getIdentifiant()) {
-					equipements[i] = null;
-					System.out.println("--Equipement removed "
-							+ eq.getIdentifiant());
-				}
-			}
+
+		boolean eqRem = equipements.remove(eq);
+		if (eqRem == true) {
+			System.out.println("--Equipement removed " + eq.getIdentifiant());
 		}
 	}
 
@@ -58,12 +60,9 @@ public class Parc {
 		float dureeGarantieMoyenne = 0;
 		int compteur = 0;
 		System.out.println("--Warranty average");
-		for (int i = 0; i < equipements.length; i++) {
-			if (equipements[i] != null) {
-				dureeGarantieMoyenne = dureeGarantieMoyenne
-						+ equipements[i].getGarantie();
-				compteur++;
-			}
+		for (Equipement equipement : equipements) {
+			dureeGarantieMoyenne = dureeGarantieMoyenne + equipement.getGarantie();
+			compteur++;
 		}
 		return dureeGarantieMoyenne / compteur;
 	}
@@ -72,11 +71,9 @@ public class Parc {
 		float PrixMoyen = 0;
 		int compteur = 0;
 		System.out.println("--Price average");
-		for (int i = 0; i < equipements.length; i++) {
-			if (equipements[i] != null) {
-				PrixMoyen = PrixMoyen + equipements[i].getPrixAchat();
-				compteur++;
-			}
+		for (Equipement equipement : equipements) {
+			PrixMoyen = PrixMoyen + equipement.getPrixAchat();
+			compteur++;
 		}
 		return PrixMoyen / compteur;
 	}
@@ -84,10 +81,8 @@ public class Parc {
 	public double getValeurParc() {
 		double valeurParc = 0;
 		System.out.println("--Parc value");
-		for (int i = 0; i < equipements.length; i++) {
-			if (equipements[i] != null) {
-				valeurParc = valeurParc + equipements[i].getPrixAchat();
-			}
+		for (Equipement equipement : equipements) {
+			valeurParc = valeurParc + equipement.getPrixAchat();
 		}
 		return valeurParc;
 	}
@@ -99,7 +94,7 @@ public class Parc {
 	public String getValeurParcFmt() {
 		return Outils.getPrixFmt(getValeurParc());
 	}
-	
+
 	public int getIdentifiant() {
 		return identifiant;
 	}
@@ -124,16 +119,12 @@ public class Parc {
 		this.gestionnaire = gestionnaire;
 	}
 
-	public Equipement[] getEquipements() {
+	public List<Equipement> getEquipements() {
 		return equipements;
 	}
 
-	public void setEquipements(Equipement[] equipements) {
+	public void setEquipements(List<Equipement> equipements) {
 		this.equipements = equipements;
 	}
-
-	
-
-
 
 }

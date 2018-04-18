@@ -14,7 +14,7 @@ enum TypeEquipement {
  * @version V18.04
  *
  */
-public class Equipement {
+public abstract class Equipement implements Comparable<Equipement> {
 	private int identifiant;
 	private String numeroSerie;
 	private String marque;
@@ -29,9 +29,8 @@ public class Equipement {
 		super();
 	}
 
-	public Equipement(int identifiant, String numeroSerie, String marque,
-			String modele, Date dateAchat, float prixAchat, int garantie,
-			TypeEquipement type) {
+	public Equipement(int identifiant, String numeroSerie, String marque, String modele, Date dateAchat,
+			float prixAchat, int garantie, TypeEquipement type) {
 		super();
 		this.identifiant = identifiant;
 		this.numeroSerie = numeroSerie;
@@ -43,9 +42,9 @@ public class Equipement {
 		this.type = type;
 	}
 
-	public String afficheDetailGarantie(Equipement eq) {
+	public String afficheDetailGarantie() {
 		String detailGarantie = null;
-		switch (eq.garantie) {
+		switch (this.garantie) {
 		case 5:
 			detailGarantie = "Garantie Etendue";
 			break;
@@ -74,13 +73,11 @@ public class Equipement {
 		long depassement = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
 		if (dateFinGarantie.after(toDay)) {
-			System.out.println("Garantie valable pour " + depassement
-					+ " jours");
+			//System.out.println("Garantie valable pour " + depassement + " jours");
 			isGarantieExpiree = false;
 
 		} else {
-			System.out.println("Garantie expirée depuis " + depassement
-					+ " jours");
+			//System.out.println("Garantie expirée depuis " + depassement + " jours");
 			isGarantieExpiree = true;
 		}
 
@@ -157,18 +154,16 @@ public class Equipement {
 
 	@Override
 	public String toString() {
-		return "Equipement [identifiant=" + identifiant + ", numeroSerie="
-				+ numeroSerie + ", marque=" + marque + ", modele=" + modele
-				+ ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + "|"
-				+ conversionUSD(prixAchat) + ", garantie=" + garantie
-				+ ", type=" + type + "]";
+		return "Equipement [identifiant=" + identifiant + ", numeroSerie=" + numeroSerie + ", marque=" + marque
+				+ ", modele=" + modele + ", dateAchat=" + dateAchat + ", prixAchat=" + prixAchat + "|"
+				+ conversionUSD(prixAchat) + ", garantie=" + garantie + ", type=" + type + "]";
 	}
 
 	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
 	}
-	
+
 	// public Equipement(int identifiant, String numeroSerie, String marque,
 	// String modele, Date dateAchat, float prixAchat, int garantie,
 	// TypeEquipement type) {
@@ -238,6 +233,5 @@ public class Equipement {
 	// this.type = type;
 	// }
 	//
-
 
 }
